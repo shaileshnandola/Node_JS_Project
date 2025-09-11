@@ -1,0 +1,54 @@
+<%-include('header')%>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body align="center">
+    <h1>view user</h1>
+    <table border="1" align="center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Action</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <% userslist.map((val)=>{%>
+                <tr>
+                    <td>
+                        <%= val.id%>
+                    </td>
+                    <td>
+                        <%=val.name%>
+                    </td>
+                    <td>
+                        <%=val.email%>
+                    </td>
+                    <td>
+                        <%=val.password%>
+                    </td>
+                    <td>
+                        <a href="/deleteuser?id=<%= val.id %>">Delete</a>||
+                        <a href="/edituser?id=<%= val.id %>">Edit</a>
+                    </td>
+                </tr>
+
+                <% })%>
+        </tbody>
+    </table>
+    <hr>
+    <a href="/adduser">Add user</a>
+</body>
+
+</html>
+<%-include('footer')%>

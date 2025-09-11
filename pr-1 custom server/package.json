@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "http": "^0.0.1-security",
+    "nodemon": "^3.1.10"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  }
+}
