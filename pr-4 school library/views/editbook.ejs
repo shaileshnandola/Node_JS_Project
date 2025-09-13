@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Book</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f5f7;
+      margin: 0;
+    }
+
+    .layout {
+      display: flex;
+      max-width: 1400px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background-color: #1f2937;
+      padding: 40px 20px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h4 {
+      font-weight: bold;
+      margin-bottom: 40px;
+      font-size: 1.8rem;
+    }
+
+    .sidebar .nav-link {
+      color: #cbd5e1;
+      margin-bottom: 15px;
+      font-size: 1rem;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .sidebar .nav-link.active,
+    .sidebar .nav-link:hover {
+      background-color: #0d6efd;
+      color: #fff;
+    }
+    .content {
+      width: calc(100% - 220px);
+      margin: 40px;
+    }
+
+    .content h3 {
+      margin-bottom: 20px;
+    }
+
+    .edit-card {
+      width: 100%;
+    }
+
+    .image-preview img {
+      border-radius: 6px;
+      margin-top: 10px;
+      object-fit: cover;
+    }
+
+    .btn-update {
+      background-color: #0d6efd;
+      color: #fff;
+      border: none;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 6px;
+    }
+
+    .btn-update:hover {
+      background-color: #0b5ed7;
+    }
+
+    .form-control.shadow-none,
+    .form-select.shadow-none {
+      box-shadow: none !important;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <div class="sidebar">
+      <h4>LibraryMS</h4>
+      <nav class="nav flex-column">
+        <a class="nav-link" href="/viewtodo">Book Catalog</a>
+        <a class="nav-link active" href="#">Add New Book</a>
+      </nav>
+    </div>
+
+    <div class="content">
+      <h3>Edit Book</h3>
+      <div class="card shadow edit-card">
+        <div class="card-body">
+          <form action="/update/<%= task._id %>" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+              <label class="form-label">Author</label>
+              <input type="text" name="author" value="<%= task.author %>" class="form-control shadow-none" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Title</label>
+              <input type="text" name="title" value="<%= task.title %>" class="form-control shadow-none" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Genre</label>
+              <select class="form-select shadow-none" id="genre" name="genre" required>
+                <option disabled <%=!task.genre ? "selected" : "" %>>Select genre</option>
+                <option value="Fantasy" <%=task.genre==="Fantasy" ? "selected" : "" %>>Fantasy</option>
+                <option value="Science Fiction" <%=task.genre==="Science Fiction" ? "selected" : "" %>>Science Fiction
+                </option>
+                <option value="Romance" <%=task.genre==="Romance" ? "selected" : "" %>>Romance</option>
+                <option value="Mystery" <%=task.genre==="Mystery" ? "selected" : "" %>>Mystery</option>
+                <option value="Horror" <%=task.genre==="Horror" ? "selected" : "" %>>Horror</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Total Books</label>
+              <input type="number" name="total" value="<%= task.total %>" class="form-control shadow-none" min="1"
+                required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <textarea name="description" class="form-control shadow-none" rows="1"
+                oninput="this.value=this.value.replace(/\n/g,'')"
+                placeholder="Single-line description"><%= task.description %></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Update Image</label>
+              <div class="image-preview">
+                <input type="file" name="image" class="form-control shadow-none">
+                <img src="<%= task.image %>" width="100" height="120">
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-update px-4 py-2">Update Book</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
