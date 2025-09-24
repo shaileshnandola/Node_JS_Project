@@ -1,0 +1,128 @@
+<%-include('../header')%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">category</h4>
+                    <div class="ms-auto text-end">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    Library
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <h5 class="card-title mb-0">category table</h5>
+                            <form>
+                                <input type="text" name="search">
+                                <input type="submit">
+                            </form>
+                        </div>
+
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">category</th>
+                                    <th scope="col">profile</th>
+                                    <th scope="col">Action</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%category.map((v,i)=>{%>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td><img src="<%= v.profile%>" alt="" height="50px" width="50px"
+                                                style="border-radius: 50px;"></td>
+                                        <td>
+                                            <%= v.category%>
+                                        </td>
+                                        <td>
+                                            <a href="/category/deleteCategory/<%= v.id%>">
+                                                <i class="me-2 mdi mdi-delete"></i>||
+                                            </a>
+                                            <a href="/category/editCategory/<%= v.id%>">
+                                                <i class="me-2 mdi mdi-pencil"></i>
+                                            </a>||
+
+                                            <a href="#ex1" rel="modal:open"
+                                                onclick="return singleCategory('<%= v._id %>')" class="text-info"><i
+                                                    class="mdi mdi-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                    <% })%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="ex1" class="modal" style="max-width: 500px; border-radius: 10px; padding: 20px;">
+        <div class="text-center mb-3">
+            <div id="profilePic" class="mb-2"></div>
+            <h4 id="adminName" class="font-weight-bold"></h4>
+        </div>
+        <div class="text-right">
+            <a href="#" rel="modal:close" class="btn btn-secondary">Close</a>
+        </div>
+    </div>
+    <%-include('../footer')%>
+        <script>
+            function singleCategory(id) {
+                $.ajax({
+                    url: "/category/singleobject/" + id,
+                    type: "POST",
+                    success: function (res) {
+                        if (res.status === "success") {
+                            $("#adminName").html(res.data.category);
+                            var img = $('<img>', {
+                                src: res.data.profile,
+                                alt: "Category Image",
+                                width: "100"
+                            });
+                            $("#profilePic").html(img);
+                        } else {
+                            $("#adminName").html("No data found");
+                            $("#profilePic").html("");
+                        }
+                    },
+                    error: function () {
+                        $("#adminName").html("Error loading data");
+                        $("#profilePic").html("");
+                    }
+                });
+            }
+        </script>

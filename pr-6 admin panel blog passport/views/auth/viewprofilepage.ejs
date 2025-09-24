@@ -1,0 +1,71 @@
+<%- include("../header") %>
+
+    <div class="page-wrapper" style="background:#f4f6f9; min-height:100vh; padding:40px 0;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-7">
+                    <div class="card shadow-sm border-0 rounded-lg">
+                        <div class="card-body text-center p-5">
+
+                            <%if(admin.profile=="") {%>
+                                <img src="/images/users/1.jpg" alt="user" class="rounded-circle" width="100">
+                                <% } else{%>
+                                    <img src="<%=admin.profile%>" alt="user" class="rounded-circle" height="100"
+                                        width="100">
+                                    <% }%>
+                                        <h3 class="mb-1" style="font-weight:600; color:#333;">
+                                            <%= admin.fname %>
+                                                <%= admin.lname %>
+                                        </h3>
+                                        <p class="text-muted mb-4"><i class="fa fa-envelope"></i>
+                                            <%= admin.email %>
+                                        </p>
+
+                                        <div class="row text-left">
+                                            <div class="col-sm-6 mb-3">
+                                                <small class="text-muted">Gender</small>
+                                                <p class="mb-0 font-weight-bold">
+                                                    <%= admin.gender %>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-6 mb-3">
+                                                <small class="text-muted">City</small>
+                                                <p class="mb-0 font-weight-bold">
+                                                    <%= admin.city %>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-6 mb-3">
+                                                <small class="text-muted">Qualification</small>
+                                                <p class="mb-0 font-weight-bold">
+                                                    <% if (Array.isArray(admin.qualification)) { %>
+                                                        <%= admin.qualification.join(", ") %>
+                  <% } else { %>
+                    <%= admin.qualification %>
+                  <% } %>
+                </p>
+              </div>
+              <div class=" col-sm-6 mb-3">
+                                                            <small class="text-muted">Message</small>
+                                                            <p class="mb-0 font-weight-bold">
+                                                                <%= admin.message %>
+                                                            </p>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <!-- Buttons -->
+                                        <div class="d-flex justify-content-center">
+                                            <a href="/Deshboard" class="btn btn-outline-secondary px-4 ml-2">
+                                                <i class="fa fa-arrow-left"></i> Back
+                                            </a>
+                                        </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../footer") %>
