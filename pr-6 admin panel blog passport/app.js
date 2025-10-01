@@ -33,7 +33,6 @@ app.use(passport.initialize())
 app.use(passport.setAuthenticateUser);
 
 app.use('/', require("./routes/index"));
-app.use('/', require('./routes/admin.routes'));
 app.use('/admin', require('./routes/blog.routes')); 
 
 app.listen(port, (err) => {

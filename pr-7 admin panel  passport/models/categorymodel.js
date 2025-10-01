@@ -4,7 +4,7 @@ const path = require('path');
 const imageupload = ('./uploads/categoryimages')
 
 const categoryschema = mongoose.Schema({
-    category: {
+    categoryname: {
         type: String,
         required: true
     },

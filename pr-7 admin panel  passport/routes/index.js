@@ -5,6 +5,7 @@ const passport = require('passport');
 routes.use("/admin", passport.checkAdmin, require("./admin.routes"));
 routes.use("/category", passport.checkAdmin, require("./category.routes"));
 routes.use("/subcategory", passport.checkAdmin, require("./subcategory.routes"));
+routes.use("/extracategory", passport.checkAdmin, require("./extracategory.routes"));
 
 routes.get("/", loginpage);
 routes.post("/login", passport.authenticate('local', { failureRedirect: '/' }), loginuser)

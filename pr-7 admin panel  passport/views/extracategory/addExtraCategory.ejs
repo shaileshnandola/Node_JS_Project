@@ -1,0 +1,95 @@
+<%- include('../header') %>
+
+    <div class="page-wrapper">
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">Add Extra Category</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <form class="form-horizontal" method="post" action="/extracategory/add-ExtraCategory">
+                            <div class="card-body">
+                                <h4 class="card-title">Extra Category Info</h4>
+
+                                <!-- Category Dropdown -->
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-end control-label col-form-label">Category</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control custom-select" name="category" id="category"
+                                            required>
+                                            <option value="">Select Category</option>
+                                            <% categories.map((cat)=> { %>
+                                                <option value="<%= cat._id %>">
+                                                    <%= cat.categoryname %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Subcategory Dropdown -->
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-end control-label col-form-label">Subcategory</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control custom-select" name="subcategory" id="subcategory"
+                                            required>
+                                            <option value="">Select Subcategory</option>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Extra Category Name -->
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-end control-label col-form-label">Extra Category
+                                        Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="extracategory"
+                                            placeholder="Extra Category Name" required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-top">
+                                <div class="card-body">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../footer') %>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const categorySelect = document.getElementById('category');
+                const subcategorySelect = document.getElementById('subcategory');
+
+                categorySelect.addEventListener('change', () => {
+                    const categoryId = categorySelect.value;
+
+                    subcategorySelect.innerHTML = '<option value="">Select Subcategory</option>';
+
+                    fetch(`/extracategory/subcategory?categoryId=${categoryId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            data.subcategory.forEach(v => {
+                                const option = document.createElement('option');
+                                option.textContent = v.subcategory;
+                                option.setAttribute('value', v._id);
+                                subcategorySelect.appendChild(option);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching subcategories:', error));
+                });
+            });
+        </script>

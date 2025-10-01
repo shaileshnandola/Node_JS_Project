@@ -26,11 +26,7 @@ module.exports.addAdmin = async (req, res) => {
 }
 module.exports.viewAdmin = async (req, res) => {
     try {
-        if (!(req.cookies.admin && req.cookies.admin._id)) {
-
-            return res.redirect("/");
-        }
-        let admin = req.cookies.admin;
+      
         var search = "";
         if (req.query.search) {
             search = req.query.search;
@@ -51,7 +47,7 @@ module.exports.viewAdmin = async (req, res) => {
         });
 
         return res.render("viewAdmin", {
-            admindata, admin
+            admindata
         });
 
     } catch (err) {

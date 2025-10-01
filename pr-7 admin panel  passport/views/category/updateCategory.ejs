@@ -27,7 +27,7 @@
         <!-- Container fluid  -->
         <!-- ============================================================== -->
         <div class="container-fluid">
-            <% let category=categorydata.category.split(" ") %>
+            <% let category=categorydata.categoryname.split(" ") %>
             <div class=" row">
                 <div class="col-md-6">
                     <div class="card">
@@ -39,7 +39,7 @@
                                     <label for="fname" class="col-sm-3 text-end control-label col-form-label">category
                                         Name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="fname" name="category"
+                                        <input type="text" class="form-control" id="fname" name="categoryname"
                                             placeholder="category Name Here" value="<%=category[0]%>" />
                                     </div>
                                 </div>

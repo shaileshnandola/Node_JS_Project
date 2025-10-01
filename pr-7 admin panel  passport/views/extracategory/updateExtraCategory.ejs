@@ -1,0 +1,64 @@
+<%- include('../header') %>
+
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Edit SubCategory</h4>
+                <div class="ms-auto text-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">SubCategory</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/extracategory/EditExtraCategorydata/<%= extracategorydata._id %>">
+                        <div class="card-body">
+                            <h4 class="card-title">Edit Form</h4>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-end control-label col-form-label">Category Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" readonly class="form-control" name="categoryname"
+                                        value="<%= extracategorydata.category?.categoryname%>">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-end control-label col-form-label">SubCategory Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" readonly class="form-control" name="subcategory"
+                                        value="<%= extracategorydata.subcategory.subcategory %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-end control-label col-form-label">ExtraCategory Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="extracategory"
+                                        value="<%= extracategorydata.extracategory %>">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-top">
+                            <div class="card-body">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../footer') %>

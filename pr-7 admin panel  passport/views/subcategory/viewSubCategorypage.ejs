@@ -54,25 +54,31 @@
                                     <th scope="col">#</th>
                                     <th scope="col">category</th>
                                     <th scope="col">profile</th>
+                                     <th scope="col">subcategory</th>
                                     <th scope="col">Action</th>
 
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <%category.map((v,i)=>{%>
+                                <%subcategories.map((v,i)=>{%>
                                     <tr>
-                                        <th scope="row"><%= i + 1 %></th>
+                                        <th scope="row">
+                                            <%= i + 1 %>
+                                        </th>
                                         <td>
-                                            <%= v.categoryname%>
+                                            <%= v.category?.categoryname %>
                                         </td>
-                                         <td><img src="<%= v.profile%>" alt="" height="50px" width="50px"
-                                                style="border-radius: 50px;"></td>
+                                        <td><img src="<%= v.category?.profile %>" height="50" width="50" style="border-radius: 50px;">
+                                        </td>
                                         <td>
-                                            <a href="/category/deleteCategory/<%= v.id%>">
+                                            <%= v.subcategory %>
+                                        </td>
+                                        <td>
+                                            <a href="/subcategory/deleteSubCategory/<%= v.id%>">
                                                 <i class="me-2 mdi mdi-delete"></i>||
                                             </a>
-                                            <a href="/category/editCategory/<%= v.id%>">
+                                            <a href="/subcategory/editSubCategory/<%= v.id%>">
                                                 <i class="me-2 mdi mdi-pencil"></i>
                                             </a>||
 

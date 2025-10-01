@@ -2,6 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const moment = require('moment');
 const AddCategory = require('../models/categorymodel');
+const SubCategory = require('../models/subcategorymodel');
+const ExtraCategory=require('../models/extracategorymodel')
+
 
 module.exports.addCategory = async (req, res) => {
     try {
@@ -45,30 +48,24 @@ module.exports.deleteCategory = async (req, res) => {
     try {
         console.log(req.params.categoryId);
 
-        let caegoryRecord = await AddCategory.findById(req.params.categoryId);
-        if (caegoryRecord) {
-            try {
-                const imagePath = path.join(__dirname, '..', 'uploads', caegoryRecord.profile);
-                fs.unlinkSync(imagePath);
-
-            }
-            catch (err) {
-                console.log('image not found');
-            }
-            let deleteCategory = await AddCategory.findByIdAndDelete(req.params.categoryId);
-            if (deleteCategory) {
-                console.log('Record delete');
-                return res.redirect("/category/viewCategory");
-            }
-            else {
-                console.log('something wrong');
-                return res.redirect("/category/viewCategory");
-            }
+        let categoryRecord = await AddCategory.findById(req.params.categoryId);
+        if (!categoryRecord) {
+            return res.redirect("/category/viewCategory")
         }
         else {
-            console.log('Record not found');
-            return res.redirect("/category/viewCategory");
-
+            let imagePath = categoryRecord.profile;
+            if (imagePath != "") {
+                imagePath = path.join(__dirname, "..", imagePath)
+                await fs.unlinkSync(imagePath);
+            }
+            await AddCategory.findByIdAndDelete(req.params.categoryId);
+            await SubCategory.deleteMany({
+                category: req.params.categoryId
+            });
+             await ExtraCategory.deleteMany({
+                category: req.params.categoryId
+            });
+            return res.redirect("/category/viewCategory")
         }
     }
     catch (err) {
@@ -79,7 +76,7 @@ module.exports.deleteCategory = async (req, res) => {
 module.exports.editCategory = async (req, res) => {
     try {
         let categorydata = await AddCategory.findById(req.params.categoryId);
-        let category = req.cookies.category;
+        let category = req.cookies.categoryname;
         if (categorydata) {
             return res.render('category/updateCategory', {
                 categorydata, category
@@ -115,7 +112,7 @@ module.exports.EditCategorydata = async (req, res) => {
         }
 
         const updatedData = {
-            category: req.body.category,
+            categoryname: req.body.categoryname,
             profile: req.file
                 ? "/uploads/categoryimages/" + req.file.filename
                 : categoryExist.profile,
