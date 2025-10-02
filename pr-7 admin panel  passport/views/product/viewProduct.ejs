@@ -1,0 +1,54 @@
+<%- include('../header') %>
+    <div class="page-wrapper">
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">View Products</h4>
+                    <div class="ms-auto text-end">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">View Products</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <% productList.map((prod)=> { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm">
+                            <img src="<%= prod.profile %>" class="card-img-top" alt="<%= prod.title %>"
+                                style="height:200px; object-fit:cover;">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>Title:</strong>
+                                    <%= prod.title %>
+                                </h5>
+                                <p class="card-text"><strong>Description:</strong>
+                                    <%= prod.description %>
+                                </p>
+                                <p><strong>Price:</strong> ₹<%= prod.price %>
+                                </p>
+                                <p><strong>Quantity:</strong>
+                                    <%= prod.Quantity %>
+                                </p>
+                                <div class="d-flex ">
+                                    <a href="/product/deleteproduct/<%= prod._id %>"
+                                        class="btn btn-sm btn-danger">Delete</a>&nbsp;
+                                    <a href="/product/editproduct/<%= prod._id %>"
+                                        class="btn btn-sm btn-warning">Edit</a>&nbsp;
+                                    <a href="/product/viewsingleproduct/<%= prod._id %>"
+                                        class="btn btn-primary btn-sm mt-auto">
+                                        View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+        <%- include('../footer') %>

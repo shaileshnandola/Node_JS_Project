@@ -1,0 +1,68 @@
+<%- include('../header') %>
+
+<div class="page-wrapper">
+  <div class="container-fluid py-5">
+
+    <!-- Back button -->
+    <div class="mb-4">
+      <a href="/product/viewproduct" class="btn btn-outline-primary btn-sm">
+        ← Back to Products
+      </a>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Left: Product Image -->
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="card border-0 shadow-sm rounded-4">
+          <img src="<%= single.profile %>" 
+               class="img-fluid rounded-4"
+               style="height:415px; object-fit:cover;"
+               alt="<%= single.productName %>">
+        </div>
+      </div>
+
+      <!-- Right: Product Details -->
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="card border-0 shadow-sm rounded-4 p-4 ">
+
+          <!-- Title -->
+          <h3 class="fw-bold text-dark mb-3"><strong>Title:</strong> <%= single.title %></h3>
+
+          <!-- Price -->
+          <h4 class="text-success fw-bold mb-3"><strong>Price:</strong> $<%= single.price %></h4>
+
+          <!-- Description -->
+          <p class="mb-4" style="line-height:1.7;"><strong>Description:</strong>
+            <%= single.description %>
+          </p>
+
+          <!-- Product Info Table -->
+          <table class="table table-borderless mb-4">
+            <tbody>
+              <tr>
+                <th class="text-secondary">Quantity:</th>
+                <td><%= single.Quantity %></td>
+              </tr>
+              <tr>
+                <th class="text-secondary">category:</th>
+                <td><%= single.category.categoryname %></td>
+              </tr>
+              <tr>
+                <th class="text-secondary">Sub Category:</th>
+                <td><%= single.subcategory.subcategory %></td>
+              </tr>
+              <tr>
+                <th class="text-secondary">Extra Category:</th>
+                <td><%= single.extracategory.extracategory %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<%- include('../footer') %>

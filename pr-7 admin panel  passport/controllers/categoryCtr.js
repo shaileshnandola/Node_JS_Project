@@ -4,6 +4,7 @@ const moment = require('moment');
 const AddCategory = require('../models/categorymodel');
 const SubCategory = require('../models/subcategorymodel');
 const ExtraCategory=require('../models/extracategorymodel')
+const productmodel=require("../models/prductmodel")
 
 
 module.exports.addCategory = async (req, res) => {
@@ -63,6 +64,9 @@ module.exports.deleteCategory = async (req, res) => {
                 category: req.params.categoryId
             });
              await ExtraCategory.deleteMany({
+                category: req.params.categoryId
+            });
+             await productmodel.deleteMany({
                 category: req.params.categoryId
             });
             return res.redirect("/category/viewCategory")
